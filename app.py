@@ -3,7 +3,7 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 import gradio as gr
-from rapidfuzz import process
+from rapidfuzz import fuzz, process
 
 
 ### Step 1: Data Loading ###
