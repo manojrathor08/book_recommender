@@ -93,11 +93,17 @@ data['book_name'] = data['book_name'].str.lower()
 embeddings = load_embeddings('book_embeddings.npy')
 
 def recommend_ui(book_title):
-    print('The book you entered is:', book_title)
+    print('The book you entered is:', book_title)  # Console log for debugging
     recommendations = recommend_books_with_category_filter(book_title, data, embeddings, top_n=5)
-    if len(recommendations)<2:
+    
+    if len(recommendations) < 2:
         return "Book not found in the dataset. Please try another title."
-    return [f"{rec[0]}" for rec in recommendations]
+    
+    output_message = f"Giving results for: {book_title}\n\nRecommended Books:\n"
+    recommendations_list = "\n".join([f"{rec[0]}" for rec in recommendations])
+    
+    return output_message + recommendations_list
+
 
 # Gradio interface
 iface = gr.Interface(
