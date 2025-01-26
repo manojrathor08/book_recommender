@@ -98,7 +98,7 @@ def recommend_ui(book_title):
     recommendations = recommend_books_with_category_filter(book_title, data, embeddings, top_n=5)
     if len(recommendations)<2:
         return "Book not found in the dataset. Please try another title."
-    return [f"{rec[0]} (Similarity: {rec[1]:.4f})" for rec in recommendations]
+    return [f"{rec[0]}" for rec in recommendations]
 
 # Gradio interface
 iface = gr.Interface(
