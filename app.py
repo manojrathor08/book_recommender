@@ -46,18 +46,28 @@ def load_embeddings(embedding_path):
 
 from rapidfuzz import process
 
-def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5):
+def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5, min_similarity=60):
     # Normalize book titles to lowercase
     book_title = book_title.lower()
-    data['book_name'] = data['book_name'].str.lower()
+    
 
-    # Check for exact match
+    # Adjust the similarity threshold for numeric titles
+    if book_title.isdigit():
+        min_similarity = 50  # Lower threshold for numeric titles
+
     if book_title not in data['book_name'].values:
-        # Use fuzzy matching to find the closest match
-        closest_match = process.extractOne(book_title, data['book_name'].values)
-        if closest_match is None or closest_match[1] < 70:  # Set a threshold for similarity
-            return ["Book not found in the dataset."]
+        # Use token_sort_ratio from fuzz module
+        closest_match = process.extractOne(
+            book_title,
+            data['book_name'].values,
+            scorer=fuzz.token_sort_ratio
+        )
+        
+        if closest_match is None or closest_match[1] < min_similarity:
+            return [f"No close match found for '{book_title}'. Please try another title."]
+        
         book_title = closest_match[0]  # Use the closest matching book name
+        print(f"Giving results for: {book_title}")
 
     # Find the index of the input book
     input_idx = data[data['book_name'] == book_title].index[0]
@@ -66,16 +76,12 @@ def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5):
 
     # Compute cosine similarity
     similarity_scores = cosine_similarity([input_embedding], embeddings).flatten()
-    similarity_scores[input_idx] = -1  # Exclude the input book
+    similarity_scores[input_idx] = -1
 
-    # Add similarity scores to a copy of the data
     data_copy = data.copy()
     data_copy['similarity'] = similarity_scores
 
-    # Filter books by category overlap
     data_filtered = data_copy[data_copy['categories_list'].apply(lambda x: len(set(x) & input_categories) > 0)]
-
-    # Sort by similarity score and select top_n recommendations
     recommended_books = data_filtered.sort_values(by='similarity', ascending=False).head(top_n)
 
     return recommended_books[['book_name', 'similarity']].values.tolist()
@@ -84,12 +90,13 @@ def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5):
 ### Main Workflow ###
 # Load data and embeddings
 data = preprocess_data(load_data('books_summary.csv'))
+data['book_name'] = data['book_name'].str.lower()
 embeddings = load_embeddings('book_embeddings.npy')
 
 def recommend_ui(book_title):
     print('The book you entered is:', book_title)
     recommendations = recommend_books_with_category_filter(book_title, data, embeddings, top_n=5)
-    if recommendations[0] == "Book not found in the dataset.":
+    if len(recommendations)<2:
         return "Book not found in the dataset. Please try another title."
     return [f"{rec[0]} (Similarity: {rec[1]:.4f})" for rec in recommendations]
 
