@@ -44,7 +44,6 @@ def load_embeddings(embedding_path):
 
 ### Step 4: Recommendation Generation ###
 
-from rapidfuzz import process
 
 def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5, min_similarity=60):
     # Normalize book titles to lowercase
