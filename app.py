@@ -125,6 +125,7 @@ def recommend_ui(book_title):
     Returns:
         list: Recommended books.
     """
+    print('The book you entered is:', book_title)
     recommendations = recommend_books_with_category_filter(book_title, data, embeddings, top_n=5)
     if recommendations[0] == "Book not found in the dataset.":
         return "Book not found in the dataset. Please try another title."
