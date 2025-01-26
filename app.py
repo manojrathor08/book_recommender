@@ -3,6 +3,7 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 import gradio as gr
+from rapidfuzz import process
 
 
 ### Step 1: Data Loading ###
@@ -42,24 +43,37 @@ def load_embeddings(embedding_path):
 
 
 ### Step 4: Recommendation Generation ###
+
 def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5):
+    # Normalize book titles to lowercase
     book_title = book_title.lower()
     data['book_name'] = data['book_name'].str.lower()
 
+    # Check for exact match
     if book_title not in data['book_name'].values:
-        return ["Book not found in the dataset."]
+        # Use fuzzy matching to find the closest match
+        closest_match, score = process.extractOne(book_title, data['book_name'].values)
+        if score < 70:  # Set a threshold for similarity
+            return [f"Book not found in the dataset. Did you mean '{closest_match}'?"]
+        book_title = closest_match
 
+    # Find the index of the input book
     input_idx = data[data['book_name'] == book_title].index[0]
     input_embedding = embeddings[input_idx]
     input_categories = set(data.loc[input_idx, 'categories_list'])
 
+    # Compute cosine similarity
     similarity_scores = cosine_similarity([input_embedding], embeddings).flatten()
-    similarity_scores[input_idx] = -1
+    similarity_scores[input_idx] = -1  # Exclude the input book
 
+    # Add similarity scores to a copy of the data
     data_copy = data.copy()
     data_copy['similarity'] = similarity_scores
 
+    # Filter books by category overlap
     data_filtered = data_copy[data_copy['categories_list'].apply(lambda x: len(set(x) & input_categories) > 0)]
+
+    # Sort by similarity score and select top_n recommendations
     recommended_books = data_filtered.sort_values(by='similarity', ascending=False).head(top_n)
 
     return recommended_books[['book_name', 'similarity']].values.tolist()
