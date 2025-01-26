@@ -65,7 +65,7 @@ def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5, 
         )
         
         if closest_match is None or closest_match[1] < min_similarity:
-            return [f"No close match found for '{book_title}'. Please try another title."]
+            return [f"No close match found for '{book_title}'. Please try another title."], book_title
         
         book_title = closest_match[0]  # Use the closest matching book name
         print(f"Giving results for: {book_title}")
