@@ -1,3 +1,14 @@
+---
+title: Book Recommendation System
+emoji: 📚
+colorFrom: indigo
+colorTo: blue
+sdk: gradio
+sdk_version: "3.14.0"
+app_file: app.py
+pinned: false
+---
+
 # Book Recommendation System
 
 This repository contains a Book Recommendation System built using pre-trained Sentence-BERT embeddings. The application recommends books based on the similarity of their summaries and shared categories.
