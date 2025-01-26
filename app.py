@@ -5,35 +5,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 import gradio as gr
 from rapidfuzz import fuzz, process
 
+### Step 1: Load processed data
+data = pd.read_csv('preprocessed_books_data.csv')  # Load from CSV
 
-### Step 1: Data Loading ###
-def load_data(file_path):
-    try:
-        data = pd.read_csv(file_path)
-        if not all(col in data.columns for col in ['book_name', 'summaries', 'categories']):
-            raise ValueError("Dataset must contain 'book_name', 'summaries', and 'categories' columns.")
-        return data
-    except Exception as e:
-        raise FileNotFoundError(f"Error loading file: {e}")
-
-
-### Step 2: Preprocessing ###
-def preprocess_data(data):
-    data = data.dropna(subset=['book_name', 'summaries']).reset_index(drop=True)
-    data = data.drop_duplicates(subset=['book_name', 'categories'], keep='first').reset_index(drop=True)
-    data = data.groupby('book_name', as_index=False).agg({
-        'summaries': 'first',
-        'categories': ', '.join
-    })
-    data['categories_list'] = data['categories'].str.split(', ')
-    data['combined_text'] = data.apply(
-        lambda row: row['summaries'] + " " + " ".join(row['categories_list']),
-        axis=1
-    )
-    return data
-
-
-### Step 3: Embedding Loading ###
+### Step 2: Embedding Loading ###
 def load_embeddings(embedding_path):
     try:
         embeddings = np.load(embedding_path)
@@ -42,9 +17,10 @@ def load_embeddings(embedding_path):
         raise FileNotFoundError(f"Error loading embeddings: {e}")
 
 
-### Step 4: Recommendation Generation ###
-# Load precomputed similarity matrix
+# Step 3: Load precomputed similarity matrix
 similarity_matrix = np.load("similarity_matrix.npy")
+# Step 4: Load embeddings
+embeddings = load_embeddings('book_embeddings.npy')
 
 
 def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5, min_similarity=60):
@@ -89,11 +65,6 @@ def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5, 
     return recommended_books[['book_name', 'similarity']].values.tolist(), book_title
 
 ### Main Workflow ###
-# Load data and embeddings
-data = preprocess_data(load_data('books_summary.csv'))
-data['book_name'] = data['book_name'].str.lower()
-embeddings = load_embeddings('book_embeddings.npy')
-
 def recommend_ui(book_title):
     print('The book you entered is:', book_title)  # Console log for debugging
     recommendations, book_name = recommend_books_with_category_filter(book_title, data, embeddings, top_n=5)
