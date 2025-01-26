@@ -44,6 +44,8 @@ def load_embeddings(embedding_path):
 
 ### Step 4: Recommendation Generation ###
 
+from rapidfuzz import process
+
 def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5):
     # Normalize book titles to lowercase
     book_title = book_title.lower()
@@ -52,10 +54,10 @@ def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5):
     # Check for exact match
     if book_title not in data['book_name'].values:
         # Use fuzzy matching to find the closest match
-        closest_match, score = process.extractOne(book_title, data['book_name'].values)
-        if score < 70:  # Set a threshold for similarity
-            return [f"Book not found in the dataset. Did you mean '{closest_match}'?"]
-        book_title = closest_match
+        closest_match = process.extractOne(book_title, data['book_name'].values)
+        if closest_match is None or closest_match[1] < 70:  # Set a threshold for similarity
+            return ["Book not found in the dataset."]
+        book_title = closest_match[0]  # Use the closest matching book name
 
     # Find the index of the input book
     input_idx = data[data['book_name'] == book_title].index[0]
