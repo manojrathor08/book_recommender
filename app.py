@@ -43,6 +43,8 @@ def load_embeddings(embedding_path):
 
 
 ### Step 4: Recommendation Generation ###
+# Load precomputed similarity matrix
+similarity_matrix = np.load("similarity_matrix.npy")
 
 
 def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5, min_similarity=60):
@@ -70,21 +72,21 @@ def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5, 
 
     # Find the index of the input book
     input_idx = data[data['book_name'] == book_title].index[0]
-    input_embedding = embeddings[input_idx]
+
+    # Use precomputed similarities
+    similarity_scores = similarity_matrix[input_idx]
+    similarity_scores[input_idx] = -1  # Exclude the input book
+
+    # Filter by categories
     input_categories = set(data.loc[input_idx, 'categories_list'])
-
-    # Compute cosine similarity
-    similarity_scores = cosine_similarity([input_embedding], embeddings).flatten()
-    similarity_scores[input_idx] = -1
-
     data_copy = data.copy()
     data_copy['similarity'] = similarity_scores
-
     data_filtered = data_copy[data_copy['categories_list'].apply(lambda x: len(set(x) & input_categories) > 0)]
+
+    # Get top recommendations
     recommended_books = data_filtered.sort_values(by='similarity', ascending=False).head(top_n)
 
-    return recommended_books[['book_name', 'similarity']].values.tolist(),book_title
-
+    return recommended_books[['book_name', 'similarity']].values.tolist(), book_title
 
 ### Main Workflow ###
 # Load data and embeddings
