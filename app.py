@@ -83,7 +83,7 @@ def recommend_books_with_category_filter(book_title, data, embeddings, top_n=5, 
     data_filtered = data_copy[data_copy['categories_list'].apply(lambda x: len(set(x) & input_categories) > 0)]
     recommended_books = data_filtered.sort_values(by='similarity', ascending=False).head(top_n)
 
-    return recommended_books[['book_name', 'similarity']].values.tolist()
+    return recommended_books[['book_name', 'similarity']].values.tolist(),book_title
 
 
 ### Main Workflow ###
@@ -94,12 +94,12 @@ embeddings = load_embeddings('book_embeddings.npy')
 
 def recommend_ui(book_title):
     print('The book you entered is:', book_title)  # Console log for debugging
-    recommendations = recommend_books_with_category_filter(book_title, data, embeddings, top_n=5)
+    recommendations, book_name = recommend_books_with_category_filter(book_title, data, embeddings, top_n=5)
     
     if len(recommendations) < 2:
         return "Book not found in the dataset. Please try another title."
     
-    output_message = f"Giving results for: {book_title}\n\nRecommended Books:\n"
+    output_message = f"Giving results for: {book_name}\n\nRecommended Books:\n"
     recommendations_list = "\n".join([f"{rec[0]}" for rec in recommendations])
     
     return output_message + recommendations_list
