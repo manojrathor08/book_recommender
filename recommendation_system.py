@@ -5,6 +5,7 @@ def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=
     Recommend books similar to the input book using Faiss for nearest-neighbor search.
     """
     # Normalize book titles to lowercase
+    data['book_name'] = data['book_name'].str.lower()
     book_title = book_title.lower()
 
     # Fuzzy matching for book title
