@@ -10,7 +10,7 @@ def main():
     print("Loading and preprocessing data...")
     data = load_data('books_summary.csv')
     data = preprocess_data(data)
-    data.to_csv('preprocessed_books_data1.csv', index=False)  # Save preprocessed data
+    data.to_csv('preprocessed_books_data.csv', index=False)  # Save preprocessed data
 
     ### Step 2: Prepare Data for Fine-Tuning ###
     print("Generating embeddings for fine-tuning preparation...")
@@ -26,11 +26,11 @@ def main():
 
     ### Step 3: Fine-Tune SBERT Model ###
     print("Fine-tuning SBERT model...")
-    fine_tune_sbert(train_examples, model_name='all-MiniLM-L6-v2', output_path='fine_tuned_sbert1', epochs=10)
+    fine_tune_sbert(train_examples, model_name='all-MiniLM-L6-v2', output_path='fine_tuned_sbert', epochs=10)
 
     ### Step 4: Generate Embeddings Using Fine-Tuned Model ###
     print("Generating embeddings using the fine-tuned model...")
-    embeddings = generate_embeddings(data, model_name='fine_tuned_sbert1')
+    embeddings = generate_embeddings(data, model_name='fine_tuned_sbert')
 
     ### Step 5: Build Faiss Index ###
     print("Building Faiss index...")

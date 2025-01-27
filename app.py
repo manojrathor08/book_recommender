@@ -4,7 +4,7 @@ from recommendation_system import recommend_books_with_faiss
 import gradio as gr
 
 # Load data and embeddings
-data = load_data('preprocessed_books_data1.csv')
+data = load_data('preprocessed_books_data.csv')
 data['categories_list'] = data['categories_list'].apply(eval).apply(set)  # Convert categories to sets
 embeddings = load_embeddings('book_embeddings.npy')
 
@@ -23,13 +23,9 @@ def recommend_ui(book_title):
     )
     if len(recommendations)<2:
         return "Book not found in the dataset. Please try another title."
-    return f"Giving results for: {book_name}\n\n" + "\n".join([f"{rec[0]} (Similarity: {rec[1]:.4f})" for rec in recommendations])
+    return f"Giving results for: {book_name}\n\n" + "\n".join([f"{rec[0]}" for rec in recommendations])
 
-print('APP is starting')
-recomm= recommend_ui(book_title='1984')
-print('recommended books', recomm)
 
-"""
 # Initialize Gradio app
 iface = gr.Interface(
     fn=recommend_ui,
@@ -41,4 +37,3 @@ iface = gr.Interface(
 
 if __name__ == "__main__":
     iface.launch()
-"""
