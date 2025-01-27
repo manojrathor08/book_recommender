@@ -1,112 +1,104 @@
 import pandas as pd
 import numpy as np
 from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.decomposition import PCA
+import faiss
 import gradio as gr
 from rapidfuzz import fuzz, process
-from joblib import Parallel, delayed
 
-### Step 1: Load processed data ###
-data = pd.read_csv('preprocessed_books_data.csv')  # Load from CSV
-
-# Convert categories to sets during initialization for faster filtering
-data['categories_list'] = data['categories_list'].apply(eval).apply(set)
+### Step 1: Load Processed Data ###
+data = pd.read_csv('preprocessed_books_data.csv')  # Load preprocessed data
+data['categories_list'] = data['categories_list'].apply(eval).apply(set)  # Convert categories to sets
 
 ### Step 2: Embedding Loading ###
 def load_embeddings(embedding_path):
+    """
+    Load embeddings from a file.
+    """
     try:
-        embeddings = np.load(embedding_path)
+        embeddings = np.load(embedding_path).astype('float32')  # Ensure float32 for Faiss compatibility
         return embeddings
     except Exception as e:
         raise FileNotFoundError(f"Error loading embeddings: {e}")
 
-# Step 3: Load precomputed similarity matrix ###
-def load_similarity_matrix(similarity_path, embeddings, reduce_dim=True):
-    try:
-        return np.load(similarity_path)
-    except FileNotFoundError:
-        # If similarity matrix is missing, compute it
-        if reduce_dim:
-            print("Reducing embedding dimensions using PCA...")
-            pca = PCA(n_components=128)
-            embeddings = pca.fit_transform(embeddings)
-            np.save("reduced_embeddings.npy", embeddings)
-
-        print("Computing similarity matrix...")
-        similarity_matrix = cosine_similarity(embeddings)
-        np.save(similarity_path, similarity_matrix)
-        return similarity_matrix
-
 embeddings = load_embeddings('book_embeddings.npy')
-similarity_matrix = load_similarity_matrix("similarity_matrix.npy", embeddings)
 
-### Step 4: Recommendation Cache ###
-recommendation_cache = {}
+### Step 3: Build or Load Faiss Index ###
+def build_faiss_index(embeddings, index_path="faiss_index.bin"):
+    """
+    Build a Faiss index for fast nearest-neighbor searches and save it to a file.
+    """
+    index = faiss.IndexFlatL2(embeddings.shape[1])  # L2 distance
+    index.add(embeddings)  # Add embeddings to the index
+    faiss.write_index(index, index_path)  # Save the index
+    return index
 
-def recommend_books_with_category_filter(book_title, data, similarity_matrix, top_n=5, min_similarity=60):
-    # Check cache first
-    if book_title in recommendation_cache:
-        return recommendation_cache[book_title]
+def load_faiss_index(index_path="faiss_index.bin"):
+    """
+    Load a prebuilt Faiss index from a file.
+    """
+    return faiss.read_index(index_path)
 
+try:
+    faiss_index = load_faiss_index("faiss_index.bin")
+except FileNotFoundError:
+    faiss_index = build_faiss_index(embeddings, "faiss_index.bin")
+
+### Step 4: Recommendation Function ###
+def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=5, min_similarity=60):
+    """
+    Recommend books similar to the input book using Faiss for nearest-neighbor search.
+    """
     # Normalize book titles to lowercase
     book_title = book_title.lower()
 
-    # Adjust the similarity threshold for numeric titles
-    if book_title.isdigit():
-        min_similarity = 50
-
-    # Fuzzy matching
+    # Fuzzy matching for book title
     if book_title not in data['book_name'].values:
-        # Narrow down candidates with substring filtering
-        candidates = [name for name in data['book_name'] if book_title in name]
-        if not candidates:
-            candidates = data['book_name'].values
-
         closest_match = process.extractOne(
             book_title,
-            candidates,
+            data['book_name'].values,
             scorer=fuzz.token_sort_ratio
         )
-
         if closest_match is None or closest_match[1] < min_similarity:
             return [f"No close match found for '{book_title}'. Please try another title."], book_title
-
+        
         book_title = closest_match[0]
         print(f"Giving results for: {book_title}")
 
     # Find the index of the input book
     input_idx = data[data['book_name'] == book_title].index[0]
+    input_embedding = embeddings[input_idx].reshape(1, -1)  # Reshape for Faiss compatibility
 
-    # Use precomputed similarities
-    similarity_scores = similarity_matrix[input_idx]
-    similarity_scores[input_idx] = -1  # Exclude the input book
+    # Use Faiss to find the nearest neighbors
+    distances, indices = faiss_index.search(input_embedding, top_n + 1)  # +1 to exclude itself
+    indices = indices.flatten()
+    distances = distances.flatten()
 
-    # Filter by categories with NumPy
+    # Exclude the input book itself
+    indices = indices[1:]
+    distances = distances[1:]
+
+    # Filter by categories
     input_categories = data.loc[input_idx, 'categories_list']
-    category_filter = np.array([
-        len(input_categories & categories) > 0 for categories in data['categories_list']
-    ])
-    data_filtered = data.loc[category_filter].copy()
-    data_filtered['similarity'] = similarity_scores[category_filter]
+    filtered_books = []
+    for idx, dist in zip(indices, distances):
+        if len(input_categories & data.loc[idx, 'categories_list']) > 0:  # Category overlap
+            similarity = 1 - (dist / max(distances))  # Normalize similarity
+            filtered_books.append((data.loc[idx, 'book_name'], similarity))
 
-    # Get top recommendations
-    recommended_books = data_filtered.sort_values(by='similarity', ascending=False).head(top_n)
-    recommendations = recommended_books[['book_name', 'similarity']].values.tolist()
+    # Limit to top_n recommendations
+    recommendations = filtered_books[:top_n]
 
-    # Cache the results
-    recommendation_cache[book_title] = (recommendations, book_title)
     return recommendations, book_title
 
 ### Step 5: Recommendation UI ###
 def recommend_ui(book_title):
-    recommendations, book_name = recommend_books_with_category_filter(book_title, data, similarity_matrix, top_n=5)
+    recommendations, book_name = recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=5)
     
-    if len(recommendations) < 2:
+    if len(recommendations) == 0:
         return "Book not found in the dataset. Please try another title."
     
     output_message = f"Giving results for: {book_name}\n\nRecommended Books:\n"
-    recommendations_list = "\n".join([f"{rec[0]}" for rec in recommendations])
+    recommendations_list = "\n".join([f"{rec[0]} (Similarity: {rec[1]:.2f})" for rec in recommendations])
     return output_message + recommendations_list
 
 # Gradio interface
