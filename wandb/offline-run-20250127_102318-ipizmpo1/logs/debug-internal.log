@@ -1,0 +1,14 @@
+{"time":"2025-01-27T10:23:26.563660238Z","level":"INFO","msg":"stream: starting","core version":"0.19.4","symlink path":"/content/drive/MyDrive/github/book_recommendation/book_recommender/wandb/offline-run-20250127_102318-ipizmpo1/logs/debug-core.log"}
+{"time":"2025-01-27T10:23:26.677587073Z","level":"INFO","msg":"created new stream","id":"ipizmpo1"}
+{"time":"2025-01-27T10:23:26.678660689Z","level":"INFO","msg":"handler: started","stream_id":"ipizmpo1"}
+{"time":"2025-01-27T10:23:26.678943275Z","level":"INFO","msg":"stream: started","id":"ipizmpo1"}
+{"time":"2025-01-27T10:23:26.679007703Z","level":"INFO","msg":"writer: Do: started","stream_id":"ipizmpo1"}
+{"time":"2025-01-27T10:23:26.67939331Z","level":"INFO","msg":"sender: started","stream_id":"ipizmpo1"}
+{"time":"2025-01-27T10:23:26.698288248Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-01-27T10:24:38.280189256Z","level":"INFO","msg":"stream: closing","id":"ipizmpo1"}
+{"time":"2025-01-27T10:24:38.280531635Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-01-27T10:24:38.282557498Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-01-27T10:24:38.284049316Z","level":"INFO","msg":"handler: closed","stream_id":"ipizmpo1"}
+{"time":"2025-01-27T10:24:38.284238799Z","level":"INFO","msg":"writer: Close: closed","stream_id":"ipizmpo1"}
+{"time":"2025-01-27T10:24:38.284259889Z","level":"INFO","msg":"sender: closed","stream_id":"ipizmpo1"}
+{"time":"2025-01-27T10:24:38.295488649Z","level":"INFO","msg":"stream: closed","id":"ipizmpo1"}

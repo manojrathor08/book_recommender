@@ -1,0 +1,30 @@
+{
+  "os": "Linux-6.1.85+-x86_64-with-glibc2.35",
+  "python": "CPython 3.11.11",
+  "startedAt": "2025-01-27T10:23:19.693844Z",
+  "program": "/content/drive/MyDrive/github/book_recommendation/book_recommender/main.py",
+  "codePath": "main.py",
+  "git": {
+    "remote": "https://rathormanoj08:@huggingface.co/spaces/rathormanoj08/book_recommender",
+    "commit": "87a11e4e4e93404cbd64875d8ddda55be9d76fb6"
+  },
+  "root": "/content/drive/MyDrive/github/book_recommendation/book_recommender",
+  "host": "f9c8ba6eb9f1",
+  "executable": "/usr/bin/python3",
+  "codePathLocal": "main.py",
+  "cpu_count": 1,
+  "cpu_count_logical": 2,
+  "disk": {
+    "/": {
+      "total": "242486079488",
+      "used": "34209234944"
+    }
+  },
+  "memory": {
+    "total": "13609431040"
+  },
+  "cpu": {
+    "count": 1,
+    "countLogical": 2
+  }
+}
