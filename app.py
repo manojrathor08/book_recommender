@@ -23,8 +23,9 @@ def recommend_ui(book_title):
     )
     if len(recommendations)<2:
         return "Book not found in the dataset. Please try another title."
-    return f"Giving results for: {book_name}\n\n" + "\n".join([f"{rec[0]}" for rec in recommendations])
-
+    return (
+    f"Giving results for: {book_name}\n\n" +
+    "\n".join([f"{i+1}. {rec[0]}" for i, rec in enumerate(recommendations)]))
 
 # Initialize Gradio app
 iface = gr.Interface(
