@@ -8,3 +8,4 @@ scikit-learn==1.6.1
 sentence-transformers==3.3.1
 sklearn-pandas==2.2.0
 rapidfuzz==3.11.0
+faiss-cpu==1.9.0.post1
