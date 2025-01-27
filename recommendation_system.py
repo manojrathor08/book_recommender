@@ -22,10 +22,16 @@ def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=
 
     # Find the index of the input book
     input_idx = data[data['book_name'] == book_title].index[0]
+    input_categories = data.loc[input_idx, 'categories_list']
     input_embedding = embeddings[input_idx].reshape(1, -1)  # Reshape for Faiss compatibility
 
-    # Use Faiss to find the nearest neighbors
-    distances, indices = faiss_index.search(input_embedding, top_n + 1)  # +1 to exclude itself
+    # Define maximum attempts to avoid infinite loop
+    max_attempts = len(indices)
+    attempt_count = 0
+    filtered_books = []
+
+    # Use Faiss to find the nearest neighbors once
+    distances, indices = faiss_index.search(input_embedding, len(embeddings))  # Search all embeddings
     indices = indices.flatten()
     distances = distances.flatten()
 
@@ -36,21 +42,15 @@ def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=
     # Convert distances to cosine similarity
     cosine_similarities = 1 - (distances / 2)
 
-    # Filter by categories
-    input_categories = data.loc[input_idx, 'categories_list']
-    filtered_books = []
-    for idx, sim in zip(indices, cosine_similarities):
+    # Start filtering by categories
+    while len(filtered_books) < top_n and attempt_count < max_attempts:
+        
+        idx = indices[attempt_count]
+        sim = cosine_similarities[attempt_count]
+        
         if len(input_categories & data.loc[idx, 'categories_list']) > 0:  # Category overlap
             filtered_books.append((data.loc[idx, 'book_name'], sim))
-        if len(filtered_books) >= top_n:
-            break
-
-    # Fallback: Add recommendations without category filtering
-    if len(filtered_books) < top_n:
-        remaining_indices = [idx for idx in indices if idx not in [rec[0] for rec in filtered_books]]
-        for idx, sim in zip(remaining_indices, cosine_similarities[len(filtered_books):]):
-            filtered_books.append((data.loc[idx, 'book_name'], sim))
-            if len(filtered_books) >= top_n:
-                break
+        
+        attempt_count += 1
 
     return filtered_books[:top_n], book_title

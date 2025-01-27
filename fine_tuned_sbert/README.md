@@ -8,72 +8,74 @@ tags:
 - loss:CosineSimilarityLoss
 base_model: sentence-transformers/all-MiniLM-L6-v2
 widget:
-- source_sentence: ' contains Oprah Winfrey’s tips for how to discover your real purpose
-    so you can live a life of success and significance.'
+- source_sentence: ' explains what’s wrong with our approach towards happiness and
+    gives philosophical suggestions that help us make our lives worth living.'
   sentences:
-  - ' shows you how to align your life with your most important goals, by finding
-    out what’s really essential, changing your habits one at a time and working focused
-    and productively on only those projects that will lead you to where you really
-    want to go.'
-  - ' contains the awful story of murder amid the Northern Ireland Conflict and a
-    reflection on what caused it, those who were primarily involved, some of the worst
-    parts of what happened, and other details of this dark era in the history of Ireland.'
-  - ' is a refreshing, fun look at personal finance, that takes away the feeling that
-    financial planning is a burden for the less disciplined, and shows you that you
-    can plan your entire financial future on a single page.'
-- source_sentence: ' will revolutionize your thinking with questions that create a
-    learning mindset. '
+  - ' is a modern, philosophic take on the joys of going away, exploring why we do
+    so in the first place and how we can avoid falling into today’s most common tourist
+    traps.'
+  - ' is the blueprint you need to turn your passion into your profession and will
+    give you the tools to turn yourself into a brand, leverage social media, produce
+    great content and reap the financial benefits of it.'
+  - ' shows why you should quit social media because it stops joy, makes you a jerk,
+    erodes truth, kills empathy, takes free will, keeps the world insane, destroys
+    authenticity, blocks economic dignity, makes politics a mess, and hates you.'
+- source_sentence: ' is a multidisciplinary study that employs anthropological, biological,
+    evolutionary, and socio-economic analyses to chart the fates of different peoples
+    throughout human history and understand why some groups succeeded to develop and
+    advance, while others haven’t.'
   sentences:
-  - ' will teach you how to lead others with lasting influence by focusing on your
-    people instead of your position.'
-  - ' is a compilation of laws that provides insights for conducting successful marketing
-    campaigns by focusing on the essence of branding and how brands must be created
-    and managed in order to survive in the competitive world.'
-  - ' outlines the future of technology by describing how change keeps accelerating,
-    what computers will look like and be made of, why biology and technology will
-    become indistinguishable and how we can’t possibly predict what’ll happen after
-    2045.'
-- source_sentence: ' is based on the idea that we believe whatever we want to believe,
-    and that it’s exactly this trait of ours, which marketers use (and sometimes abuse)
-    to sell their products by infusing them with good stories – whether they’re true
-    or not.'
+  - ' explores the philosophy of life and the secrets behind peak performance in MMA
+    of John Kavanagh, the trainer and friend of superstar Conor McGregor, and their
+    journey to success which started in a modest gym in Ireland and ended up with
+    McGregor having a net worth of 100 million dollars. '
+  - ' explores the curious mind of man’s best friend in relation to human intelligence,
+    as dogs and humans are connected and have many similarities that make the relationship
+    between them so strong and unique. '
+  - ' teaches you how to beat overthinking by challenging whether your thoughts are
+    true, retiring unhelpful and unkind ideas, adopting thought-boosting mantras from
+    others, using symbols to reinforce positive thoughts, and more.'
+- source_sentence: ' teaches you countless principles to become a likable person,
+    handle your relationships well, win others over and help them change their behavior
+    without being intrusive.'
   sentences:
-  - ' gives powerful inspiration to change your life by helping you identify what
-    you should improve on, how to get over the hurdles in your way, and the patterns
-    and habits you need to set so that achieving your dreams is more possible than
-    ever.'
-  - ' is a message to everyone who’s not on the social media train yet, showing them
-    how to tell their story the right way on social media, so that it’ll actually
-    get heard.'
-  - ' is your guide for learning how to stop pushing yourself to do more at your job
-    and live a happier and more fulfilling life by making your money work hard for
-    you. '
-- source_sentence: ' gives you advice to declutter your space and keep it orderly,
-    to foster your inner peace and allow you to flourish.'
-  sentences:
-  - ' brings together the spiritual calmness and mindful behavior of Eastern religions
-    with Western striving for achieving internal and external success, showing you
-    seven specific ways to let both come to you.'
-  - ' will show you how to harness the power of slowing down your body and mind for
-    less distractions, better self-control, and, above all, a happier and more peaceful
+  - ' shows you the surprisingly big influence other people have on your life, what
+    different kinds of relationships you have with them and how you can cultivate
+    more good ones to replace the bad, fake or unconnected and live a more fulfilled
     life.'
-  - ' is a historical exploration of the four primary elements we use to transform
-    our food, from fire to water, air, and earth, celebrating traditional cooking
-    methods while showing you practical ways to improve your eating habits and prepare
-    more of your own food.'
-- source_sentence:  is a story-based, stern yet entertaining self-help manual for
-    young people laying out a set of simple rules to help us become more disciplined,
-    behave better, act with integrity, and balance our lives while enjoying them as
-    much as we can.
+  - ' describes a scientific approach to being happier by giving you a short quiz
+    to determine your “happiness set point,” followed by various tools and tactics
+    to help you take control of the large chunk of happiness that’s fully within your
+    grasp.'
+  - ' will help you become a better leader in the office by sharing the life and teachings
+    of businessman Bill Campbell who helped build multi-billion dollar companies in
+    Silicon Valley.'
+- source_sentence: ' shows how much of what’s truly important in life can be solved
+    by the wisdom left behind by brilliant minds from long past. '
   sentences:
-  - ' explains why people with many talents don’t fit into a world where we need specialists
-    and, if you have many talents yourself, shows you how you can lift this curse,
-    by giving you a framework to follow and find your true vocation in life.'
-  - ' teaches you the 10 qualities of winners, which set them apart and help them
-    win in every sphere of life: personally, professionally and spiritually.'
-  - ' will make you smarter and healthier by teaching you about the tiny ecosystems
-    of microbes that live inside your body and on everything you see and by showing
-    you how they affect your life and how to utilize them to improve your well-being.'
+  - ' provides a more grounded way of living by eliminating the cult of being productive
+    all the time to achieve success, instead offering a way to be at peace with yourself,
+    prioritizing mental health and a simple yet meaningful life. '
+  - ' will help you make everything, even the worst of times, go more smoothly by
+    learning about a few useful phrases to habitually use come rain or shine.'
+  - ' is the result of a 7-day meeting between the Dalai Lama and Desmond Tutu, two
+    of the world’s most influential spiritual leaders, during which they discussed
+    one of life’s most important questions: how do we find joy despite suffering?'
+- source_sentence: ' takes a close look at the life of Albert Einstein, beginning
+    in how his childhood shaped him, what his biggest discoveries and personal struggles
+    were and how his focus changed in later years, without his genius ever fading
+    until his very last moment.'
+  sentences:
+  - ' helps you understand why habits are at the core of everything you do, how you
+    can change them, and what impact that will have on your life, your business and
+    society.'
+  - ' will help you become healthier by teaching you the truth behind the mind-body
+    connection, revealing how your mental state does in fact affect your physical
+    condition and how you can improve both.'
+  - ' shows how people and companies can adapt in the rapidly changing world we live
+    in today, explaining how a growth mindset, colleaboration, and losing your ego
+    will build your confidence that you can stay relevant and competitive as the world
+    around you accelerates.'
 pipeline_tag: sentence-similarity
 library_name: sentence-transformers
 ---
@@ -128,9 +130,9 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer("sentence_transformers_model_id")
 # Run inference
 sentences = [
-    '\xa0is a story-based, stern yet entertaining self-help manual for young people laying out a set of simple rules to help us become more disciplined, behave better, act with integrity, and balance our lives while enjoying them as much as we can.',
-    ' will make you smarter and healthier by teaching you about the tiny ecosystems of microbes that live inside your body and on everything you see and by showing you how they affect your life and how to utilize them to improve your well-being.',
-    ' explains why people with many talents don’t fit into a world where we need specialists and, if you have many talents yourself, shows you how you can lift this curse, by giving you a framework to follow and find your true vocation in life.',
+    ' takes a close look at the life of Albert Einstein, beginning in how his childhood shaped him, what his biggest discoveries and personal struggles were and how his focus changed in later years, without his genius\xa0ever fading until his very last moment.',
+    ' shows how people and companies can adapt in the rapidly changing world we live in today, explaining how a growth mindset, colleaboration, and losing your ego will build your confidence that you can stay relevant and competitive as the world around you accelerates.',
+    ' helps you understand why\xa0habits are at the core of everything you\xa0do, how you can change them, and what impact that will have on your life, your business and society.',
 ]
 embeddings = model.encode(sentences)
 print(embeddings.shape)
@@ -188,16 +190,16 @@ You can finetune this model on your own dataset.
 * Size: 15,000 training samples
 * Columns: <code>sentence_0</code>, <code>sentence_1</code>, and <code>label</code>
 * Approximate statistics based on the first 1000 samples:
-  |         | sentence_0                                                                        | sentence_1                                                                        | label                                                            |
-  |:--------|:----------------------------------------------------------------------------------|:----------------------------------------------------------------------------------|:-----------------------------------------------------------------|
-  | type    | string                                                                            | string                                                                            | float                                                            |
-  | details | <ul><li>min: 2 tokens</li><li>mean: 41.04 tokens</li><li>max: 73 tokens</li></ul> | <ul><li>min: 3 tokens</li><li>mean: 41.58 tokens</li><li>max: 81 tokens</li></ul> | <ul><li>min: -0.04</li><li>mean: 0.36</li><li>max: 0.9</li></ul> |
+  |         | sentence_0                                                                         | sentence_1                                                                       | label                                                             |
+  |:--------|:-----------------------------------------------------------------------------------|:---------------------------------------------------------------------------------|:------------------------------------------------------------------|
+  | type    | string                                                                             | string                                                                           | float                                                             |
+  | details | <ul><li>min: 12 tokens</li><li>mean: 41.11 tokens</li><li>max: 67 tokens</li></ul> | <ul><li>min: 2 tokens</li><li>mean: 41.0 tokens</li><li>max: 70 tokens</li></ul> | <ul><li>min: -0.07</li><li>mean: 0.36</li><li>max: 0.79</li></ul> |
 * Samples:
-  | sentence_0                                                                                                                                                                                    | sentence_1                                                                                                                                                                                                                                  | label                            |
-  |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
-  | <code> will enlarge your knowledge of our expanding universe by showing you how it began, what we’re learning about it now, and what will happen to it in the future.</code>                  | <code> draws on many of history’s most famous power quarrels to show you what power looks like, how you can get it, what to do to defend yourself against the power of others and, most importantly, how to use it well and keep it.</code> | <code>0.11771032512187958</code> |
-  | <code> is a blueprint to help you close the gap between your day job and your dream job, showing you simple steps you can take towards your dream without turning it into a nightmare.</code> | <code> contains Oprah Winfrey’s tips for how to discover your real purpose so you can live a life of success and significance.</code>                                                                                                       | <code>0.3589766651391983</code>  |
-  | <code> explains why Silicon Valley is suffering a nervous breakdown as big data and machine intelligence comes to an end and the post-Google era dawns.</code>                                | <code> makes you more vigilant of the warning signs of oppression by identifying it’s political nature, how to protect yourself and society, and what you can do to resist dangerous leadership.</code>                                     | <code>0.137077134847641</code>   |
+  | sentence_0                                                                                                                                                                                                                                                                              | sentence_1                                                                                                                                                                                                                         | label                            |
+  |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+  | <code> shows you how to stop looking at the clock and start looking at the compass, by figuring out what’s important, prioritizing those things in your life, developing a vision for the future, building the right relationships and becoming a strong leader wherever you go.</code> | <code> teaches us how to persist in creative work when our brain wants to take a million different paths, showing us how to harness our brain power in moments of innovation as well as tediousness.</code>                        | <code>0.41934635043144225</code> |
+  | <code> shares James Comey’s experiences as the director of the FBI and outlines what he learned about leadership, ethics, and politics throughout his life, career, and experiences with President Trump who was the reason he lost his job in May of 2017.</code>                      | <code> will help you become more patient with the speed of your progress by identifying the damaging influences of early achievement culture and societal pressure and how to be proud of reaching your peak later in life.</code> | <code>0.06931390687823295</code> |
+  | <code> gives the relationship advice of hundreds of couples who have stayed together into old age and will teach you how to have happiness and longevity in your love life.</code>                                                                                                      | <code> shows you how to start a successful business based on the principles of the founders of some of the world’s most famous and accomplished startups.</code>                                                                   | <code>0.18417405635118486</code> |
 * Loss: [<code>CosineSimilarityLoss</code>](https://sbert.net/docs/package_reference/sentence_transformer/losses.html#cosinesimilarityloss) with these parameters:
   ```json
   {
