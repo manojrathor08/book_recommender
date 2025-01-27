@@ -103,11 +103,11 @@ def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=
 def recommend_ui(book_title):
     recommendations, book_name = recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=5)
     
-    if len(recommendations) == 0:
+    if len(recommendations) < 2:
         return "Book not found in the dataset. Please try another title."
     
     output_message = f"Giving results for: {book_name}\n\nRecommended Books:\n"
-    recommendations_list = "\n".join([f"{rec[0]} (Similarity: {rec[1]:.2f})" for rec in recommendations])
+    recommendations_list = "\n".join([f"{rec[0]}" for rec in recommendations])
     return output_message + recommendations_list
 
 # Gradio interface
