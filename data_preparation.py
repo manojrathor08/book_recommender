@@ -21,24 +21,43 @@ def load_data(file_path):
 
 def preprocess_data(data):
     """
-    Preprocess the dataset by handling missing values, duplicates, and formatting.
+    Preprocess the dataset by:
+    - Dropping rows with missing values in critical columns.
+    - Removing duplicates based on 'book_name' and 'categories'.
+    - Grouping categories for each book.
+    - Adding a combined text column with summaries and categories.
+
     Args:
         data (pd.DataFrame): Raw dataset.
+
     Returns:
         pd.DataFrame: Preprocessed dataset.
     """
-    data = data.dropna(subset=['book_name', 'summaries']).reset_index(drop=True)
-    data = data.drop_duplicates(subset=['book_name', 'categories'], keep='first').reset_index(drop=True)
+    # Remove duplicates where both 'book_name' and 'categories' are identical
+    data = data.drop_duplicates(subset=['book_name'], keep='first').reset_index(drop=True)
+    # Drop rows with missing values in 'book_name' and 'summaries'
+    missing_or_empty_rows = data[
+    (data['book_name'].isna() | (data['book_name'].str.strip() == "") | (data['book_name'].str.strip() == ".")) |
+    (data['summaries'].isna() | (data['summaries'].str.strip() == "") | (data['summaries'].str.strip() == "."))]
+
+    # Drop these rows
+    data = data.drop(missing_or_empty_rows.index)
+
+    # Reset the index after dropping rows (optional)
+    data.reset_index(drop=True, inplace=True)
+
+
+    # Group categories for each book
     data = data.groupby('book_name', as_index=False).agg({
-        'summaries': 'first',
-        'categories': ', '.join
+        'summaries': 'first',  # Retain the first summary
+        'categories': ', '.join  # Combine categories into a single string
     })
+
+    # Split categories into a list
     data['categories_list'] = data['categories'].str.split(', ')
-    data['combined_text'] = data.apply(
-        lambda row: row['summaries'] + " " + " ".join(row['categories_list']),
-        axis=1
-    )
+
     return data
+
 
 def generate_pairs(data, num_samples=1000):
   pairs = []

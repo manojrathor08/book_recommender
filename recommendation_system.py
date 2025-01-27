@@ -25,15 +25,16 @@ def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=
     input_categories = data.loc[input_idx, 'categories_list']
     input_embedding = embeddings[input_idx].reshape(1, -1)  # Reshape for Faiss compatibility
 
-    # Define maximum attempts to avoid infinite loop
-    max_attempts = len(indices)
-    attempt_count = 0
-    filtered_books = []
-
+    
     # Use Faiss to find the nearest neighbors once
     distances, indices = faiss_index.search(input_embedding, len(embeddings))  # Search all embeddings
     indices = indices.flatten()
     distances = distances.flatten()
+    
+    # Define maximum attempts to avoid infinite loop
+    max_attempts = len(indices)
+    attempt_count = 0
+    filtered_books = []
 
     # Exclude the input book itself
     indices = indices[1:]
