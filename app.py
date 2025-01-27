@@ -77,18 +77,27 @@ def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=
     indices = indices[1:]
     distances = distances[1:]
 
+    # Convert distances to cosine similarity
+    cosine_similarities = 1 - (distances / 2)
+
     # Filter by categories
     input_categories = data.loc[input_idx, 'categories_list']
     filtered_books = []
-    for idx, dist in zip(indices, distances):
+    for idx, sim in zip(indices, cosine_similarities):
         if len(input_categories & data.loc[idx, 'categories_list']) > 0:  # Category overlap
-            similarity = 1 - (dist / max(distances))  # Normalize similarity
-            filtered_books.append((data.loc[idx, 'book_name'], similarity))
+            filtered_books.append((data.loc[idx, 'book_name'], sim))
+        if len(filtered_books) >= top_n:
+            break
 
-    # Limit to top_n recommendations
-    recommendations = filtered_books[:top_n]
+    # Fallback: Add recommendations without category filtering
+    if len(filtered_books) < top_n:
+        remaining_indices = [idx for idx in indices if idx not in [rec[0] for rec in filtered_books]]
+        for idx, sim in zip(remaining_indices, cosine_similarities[len(filtered_books):]):
+            filtered_books.append((data.loc[idx, 'book_name'], sim))
+            if len(filtered_books) >= top_n:
+                break
 
-    return recommendations, book_title
+    return filtered_books[:top_n], book_title
 
 ### Step 5: Recommendation UI ###
 def recommend_ui(book_title):
