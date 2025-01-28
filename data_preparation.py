@@ -1,7 +1,7 @@
 import pandas as pd
 from itertools import combinations
 from sklearn.utils import shuffle
-from sentence_transformers import util, InputExample
+from sentence_transformers import SentenceTransformer,util, InputExample
 
 def load_data(file_path):
     """
