@@ -22,7 +22,7 @@ def generate_embeddings(data, model_name='all-MiniLM-L6-v2'):
       return embeddings
 
 
-def build_faiss_index(embeddings, index_path="faiss_index1.bin"):
+def build_faiss_index(embeddings, index_path="faiss_index.bin"):
     """
     Build a Faiss index for fast nearest-neighbor searches.
 
