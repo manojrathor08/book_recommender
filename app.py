@@ -3,7 +3,7 @@ from embedding_faiss import load_faiss_index, load_embeddings
 from recommendation_system import recommend_books_with_faiss
 import gradio as gr
 
-# Load data and embeddings
+# Load preprocessed data and embeddings
 data = load_data('preprocessed_books_data.csv')
 data['categories_list'] = data['categories_list'].apply(eval).apply(set)  # Convert categories to sets
 embeddings = load_embeddings('book_embeddings.npy')
