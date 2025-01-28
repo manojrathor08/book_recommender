@@ -11,25 +11,46 @@ pinned: false
 
 # Book Recommendation System
 
-This repository contains a Book Recommendation System built using pre-trained Sentence-BERT embeddings. The application recommends books based on the similarity of their summaries and shared categories.
+This repository contains a Book Recommendation System that uses fine-tuned Sentence-BERT (SBERT) embeddings to recommend books based on the similarity of their summaries and shared categories.
 
 ## Features
-- Precomputed embeddings for faster recommendations.
-- Category filtering to ensure relevant results.
-- Cosine similarity for calculating book similarity.
-- User-friendly modular code structure.
+ - **`Preprocessing`**: Handles missing values, removes duplicates, and organizes categories for each book.
+ - **`Embedding Generation`**: Fine-tunes Sentence-BERT (all-MiniLM-L6-v2) on book summaries for domain-specific embeddings.
+ - **`Efficient Search`**: Utilizes Faiss for fast searches.
+ - **`Similarity Scoring`**: Combines cosine similarity and category filtering to ensure highly relevant recommendations.
+ - **`Scalable Design`**: Modularized code for data preprocessing, embedding generation, and recommendation.
 
 ## File Structure
-- **`app.py`**: The main Python script for running the recommendation system.
-- **`books_summary.csv`**: Dataset containing book summaries, categories, and names.
-- **`book_embeddings.npy`**: Precomputed Sentence-BERT embeddings for all book summaries.
-- **`requirements.txt`**: List of dependencies required to run the project.
+ - **`app.py`**: The main script for running the recommendation system.
+ - **`books_summary.csv`**: The dataset containing book summaries, categories, and names.
+ - **`preprocessed_books_data.csv`**: Processed dataset after cleaning and feature engineering.
+ - **`book_embeddings.npy`**: Precomputed embeddings of book summaries (after fine-tuning SBERT).
+ - **`faiss_index.bin`**: Faiss index for efficient similarity search.
+ - **`requirements.txt`**: List of dependencies required to run the project.
 
 ## How It Works
-1. The dataset is preprocessed to handle missing values, duplicates, and group categories for each book.
-2. Sentence-BERT (`all-MiniLM-L6-v2`) is used to compute embeddings for book summaries.
-3. The system calculates the cosine similarity between the input book and other books in the dataset.
-4. Recommendations are filtered based on shared categories and ranked by similarity scores.
+1. Preprocessing:
+
+Handles missing or empty rows for book_name and summaries.
+Removes duplicates and groups categories for each book.
+Splits categories into lists for efficient category filtering.
+
+2. Fine-Tuning:
+    - Fine-tunes Sentence-BERT (all-MiniLM-L6-v2) using stratified book pairs created based on:
+    - Semantic similarity: Calculated using SBERT.
+    - Jaccard similarity: Based on category overlap.
+
+3. Embedding Generation:
+    - Generates embeddings using the fine-tuned model and saves them as book_embeddings.npy.
+
+4. Faiss Indexing:
+    - Builds a Faiss L2 Index for fast nearest-neighbor searches.
+    - Saves the index as faiss_index.bin.
+
+5. Recommendation:
+     - Searches for similar books using Faiss.
+     - Filters recommendations based on shared categories with the input book.
+    - Returns the top 5 recommendations ranked by similarity.
 
 ## Usage
 1. Clone this repository:
@@ -37,9 +58,11 @@ This repository contains a Book Recommendation System built using pre-trained Se
    - cd <repository_folder>
 2. Install the required dependencies:
    - pip install -r requirements.txt
-3. Run the application:
+3. Fine-tune the model
+    - python main.py
+4. Run the application:
    - python app.py
-4. Enter a book title to receive recommendations.
+5. Enter a book title to receive recommendations.
 
 ## Example Input/Output
 #### Input:
@@ -57,10 +80,12 @@ This repository contains a Book Recommendation System built using pre-trained Se
 
 ## Acknowledgments
 ### Pre-trained Sentence-BERT model used: 
-- all-MiniLM-L6-v2
+- Pre-trained SBERT Model: all-MiniLM-L6-v2
+- Faiss: A library for efficient similarity searches.
 
 ### Libraries used:
 - pandas: For data manipulation.
 - numpy: For numerical operations.
-- sentence-transformers: For loading pre-trained embeddings.
+- sentence-transformers: For loading pre-trained models.
 - scikit-learn: For cosine similarity calculation. 
+- Faiss: A library for efficient similarity searches.
