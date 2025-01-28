@@ -38,8 +38,9 @@ def main():
 
     ### Step 6: Save Embeddings ###
     print("Saving embeddings...")
-    
-    np.save('book_embeddings.npy', embeddings)  # Save embeddings
+    np.save('book_embeddings.npy', embeddings) 
+
     print("All steps completed successfully!")
+    
 if __name__ == "__main__":
     main()
