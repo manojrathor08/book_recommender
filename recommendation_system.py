@@ -22,7 +22,6 @@ def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=
         print(f"Giving results for: {book_title}")
 
     # Find the index of the input book
-
     input_idx = data[data['book_name'] == book_title].index[0]
     input_categories = data.loc[input_idx, 'categories_list']
     input_embedding = embeddings[input_idx].reshape(1, -1)  # Reshape for Faiss compatibility
@@ -37,8 +36,6 @@ def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=
     max_attempts = len(indices)
     attempt_count = 0
     filtered_books = []
-
-    
 
     # Exclude the input book itself
     indices = indices[1:]
