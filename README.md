@@ -29,50 +29,51 @@ This repository contains a Book Recommendation System that uses fine-tuned Sente
  - **`requirements.txt`**: List of dependencies required to run the project.
 
 ## How It Works
-1. Preprocessing:
+ - **`Preprocessing`**:
+    - Handles missing or empty rows for book_name and summaries.
+    - Removes duplicates and groups categories for each book.
+    - Splits categories into lists for efficient category filtering.
 
-Handles missing or empty rows for book_name and summaries.
-Removes duplicates and groups categories for each book.
-Splits categories into lists for efficient category filtering.
-
-2. Fine-Tuning:
+ - **`Fine-Tuning`**:
     - Fine-tunes Sentence-BERT (all-MiniLM-L6-v2) using stratified book pairs created based on:
     - Semantic similarity: Calculated using SBERT.
     - Jaccard similarity: Based on category overlap.
 
-3. Embedding Generation:
+ - **`Embedding Generation`**:
     - Generates embeddings using the fine-tuned model and saves them as book_embeddings.npy.
 
-4. Faiss Indexing:
+ - **`Faiss Indexing`**:
     - Builds a Faiss L2 Index for fast nearest-neighbor searches.
     - Saves the index as faiss_index.bin.
 
-5. Recommendation:
+ - **`Recommendation`**:
      - Searches for similar books using Faiss.
      - Filters recommendations based on shared categories with the input book.
-    - Returns the top 5 recommendations ranked by similarity.
+     - Returns the top 5 recommendations ranked by similarity.
 
 ## Usage
-1. Clone this repository:
+ - **`Clone this repository`**:
    - git clone <repository_url>
    - cd <repository_folder>
-2. Install the required dependencies:
+ - **`Install the required dependencies`**:
    - pip install -r requirements.txt
-3. Fine-tune the model
+ - **`Fine-tune the model`**:
     - python main.py
-4. Run the application:
+ - **`Run the application`**:
    - python app.py
-5. Enter a book title to receive recommendations.
 
 ## Example Input/Output
-#### Input:
+##### Input:
 - Book title: Siddhartha
 
-#### Output:
+##### Output:
 - Recommendations:
-- Book Name: The Alchemist
-- Book Name: Life of Pi
-- Book Name: The Power of Now
+    - Giving results for: siddhartha
+    1. the universe has your back
+    2. you’ll see it when you believe it
+    3. trying not to try
+    4. everyday zen
+    5. see you at the top
 
 ## Requirements
 - Python 3.7 or higher
@@ -81,11 +82,13 @@ Splits categories into lists for efficient category filtering.
 ## Acknowledgments
 ### Pre-trained Sentence-BERT model used: 
 - Pre-trained SBERT Model: all-MiniLM-L6-v2
-- Faiss: A library for efficient similarity searches.
 
 ### Libraries used:
-- pandas: For data manipulation.
-- numpy: For numerical operations.
-- sentence-transformers: For loading pre-trained models.
-- scikit-learn: For cosine similarity calculation. 
-- Faiss: A library for efficient similarity searches.
+- **pandas**: For data manipulation and cleaning.
+- **numpy**: For numerical operations and handling embeddings.
+- **sentence-transformers**: For loading pre-trained models and generating embeddings.
+- **scikit-learn**: For cosine similarity calculation.
+- **Faiss**: A library for efficient similarity searches.
+- **Hugging Face Spaces**: For hosting and running the application in a web-based environment.
+- **rapidfuzz**: For fuzzy string matching to find close matches to book titles.
+- **Gradio**: For building a user-friendly web interface for the recommendation system.
