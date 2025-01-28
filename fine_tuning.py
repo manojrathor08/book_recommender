@@ -1,7 +1,7 @@
 from sentence_transformers import SentenceTransformer, losses
 from torch.utils.data import DataLoader
 
-def fine_tune_sbert(train_examples, model_name='all-MiniLM-L6-v2', output_path='fine_tuned_sbert1', epochs=10):
+def fine_tune_sbert(train_examples, model_name='all-MiniLM-L6-v2', output_path='fine_tuned_sbert', epochs=10):
     """
     Fine-tune the SBERT model on the provided training data.
 
