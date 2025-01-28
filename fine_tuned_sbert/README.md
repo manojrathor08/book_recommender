@@ -8,74 +8,78 @@ tags:
 - loss:CosineSimilarityLoss
 base_model: sentence-transformers/all-MiniLM-L6-v2
 widget:
-- source_sentence: ' explains what’s wrong with our approach towards happiness and
-    gives philosophical suggestions that help us make our lives worth living.'
+- source_sentence: ' makes you smarter by helping you understand where this important
+    aspect of our lives comes from, how we’ve used it throughout history to get to
+    where we are today, and why we need to be careful about how we consume it so that
+    we can have a better future.'
   sentences:
-  - ' is a modern, philosophic take on the joys of going away, exploring why we do
-    so in the first place and how we can avoid falling into today’s most common tourist
-    traps.'
-  - ' is the blueprint you need to turn your passion into your profession and will
-    give you the tools to turn yourself into a brand, leverage social media, produce
-    great content and reap the financial benefits of it.'
-  - ' shows why you should quit social media because it stops joy, makes you a jerk,
-    erodes truth, kills empathy, takes free will, keeps the world insane, destroys
-    authenticity, blocks economic dignity, makes politics a mess, and hates you.'
-- source_sentence: ' is a multidisciplinary study that employs anthropological, biological,
-    evolutionary, and socio-economic analyses to chart the fates of different peoples
-    throughout human history and understand why some groups succeeded to develop and
-    advance, while others haven’t.'
+  - ' makes you smarter and more compassionate by revealing the previously unknown
+    story of a woman with extraordinary cells that still live today and have contributed
+    to dozens of medical breakthroughs.'
+  - ' shows you how to become your best self and live up to your full potential by
+    outlining nine science-backed ways to beat the odds and achieve your goals and
+    dreams.'
+  - ' is a classic novel from 1605 which portraits the life and insightful journey
+    of Don Quixote de la Mancha, a Spanish man who seems to be losing his mind on
+    his quest to become a knight and restore chivalry alongside with a farmer named
+    Sancho Panza, with whom he fights multiple imaginary enemies and faces a series
+    of fantastic challenges.'
+- source_sentence: ' explains the importance of emotions in your life, how they help
+    and hurt your ability to navigate the world, followed by practical advice on how
+    to improve your own emotional intelligence and why that is the key to leading
+    a successful life.'
   sentences:
-  - ' explores the philosophy of life and the secrets behind peak performance in MMA
-    of John Kavanagh, the trainer and friend of superstar Conor McGregor, and their
-    journey to success which started in a modest gym in Ireland and ended up with
-    McGregor having a net worth of 100 million dollars. '
-  - ' explores the curious mind of man’s best friend in relation to human intelligence,
-    as dogs and humans are connected and have many similarities that make the relationship
-    between them so strong and unique. '
-  - ' teaches you how to beat overthinking by challenging whether your thoughts are
-    true, retiring unhelpful and unkind ideas, adopting thought-boosting mantras from
-    others, using symbols to reinforce positive thoughts, and more.'
-- source_sentence: ' teaches you countless principles to become a likable person,
-    handle your relationships well, win others over and help them change their behavior
-    without being intrusive.'
+  - ' identifies the hidden superpowers of introverts and empowers them by helping
+    them understand why it’s so difficult to be quiet in a world that’s loud and how
+    to ease their way into becoming confident in social situations.'
+  - ' uses science, spirituality, humor, and Dante’s Divine Comedy to teach you how
+    to find well-being, healing, a sense of purpose, and much more by rediscovering
+    integrity, or the recently lost art of living true to yourself by what you do,
+    think and say.'
+  - ' will improve your mental state and level of success by identifying what you
+    get wrong about joy and how to discover what’s most important to you and how to
+    make those things a more significant part of your life.'
+- source_sentence: ' will help you become happier, find your purpose, overcome your
+    fears, and begin living the life you’ve always wanted by identifying the steps
+    you need to take to connect with a higher spiritual power.'
   sentences:
-  - ' shows you the surprisingly big influence other people have on your life, what
-    different kinds of relationships you have with them and how you can cultivate
-    more good ones to replace the bad, fake or unconnected and live a more fulfilled
-    life.'
-  - ' describes a scientific approach to being happier by giving you a short quiz
-    to determine your “happiness set point,” followed by various tools and tactics
-    to help you take control of the large chunk of happiness that’s fully within your
-    grasp.'
-  - ' will help you become a better leader in the office by sharing the life and teachings
-    of businessman Bill Campbell who helped build multi-billion dollar companies in
-    Silicon Valley.'
-- source_sentence: ' shows how much of what’s truly important in life can be solved
-    by the wisdom left behind by brilliant minds from long past. '
+  - ' is an international bestseller that will help you unearth your sad, suppressed
+    memories from childhood that still haunt you today and teach you how to confront
+    them so you can avoid passing them on to your children, release yourself from
+    the pains of your past, and finally be free to live a life of fulfillment.'
+  - ' advocates against the use of sugar in the food industry and offers a critical
+    look at how this harmful substance took over the world under the eyes of our highest
+    institutions, who are very well aware of its toxicity but choose to remain silent.'
+  - ' is about changing your overall perspective, so you can embrace a philosophy
+    that’ll help you achieve your full potential in work, relationships, finance,
+    and all other walks of life.'
+- source_sentence: ' by Michael Newman outlines the history of the governmental theory
+    that everything should be owned and controlled by the community as a whole, including
+    how this idea has impacted the world in the last 200 years, how its original aims
+    have been lost, and ways we might use it in the future.'
   sentences:
-  - ' provides a more grounded way of living by eliminating the cult of being productive
-    all the time to achieve success, instead offering a way to be at peace with yourself,
-    prioritizing mental health and a simple yet meaningful life. '
-  - ' will help you make everything, even the worst of times, go more smoothly by
-    learning about a few useful phrases to habitually use come rain or shine.'
-  - ' is the result of a 7-day meeting between the Dalai Lama and Desmond Tutu, two
-    of the world’s most influential spiritual leaders, during which they discussed
-    one of life’s most important questions: how do we find joy despite suffering?'
-- source_sentence: ' takes a close look at the life of Albert Einstein, beginning
-    in how his childhood shaped him, what his biggest discoveries and personal struggles
-    were and how his focus changed in later years, without his genius ever fading
-    until his very last moment.'
+  - ' is a collection of essays by Y Combinator founder Paul Graham about what makes
+    a good computer programmer and how you can code the future if you are one, making
+    a fortune in the process.'
+  - ' offers its readers a focus-based approach that they can use to achieve their
+    financial and personal goals through practical exercises and habits that they
+    can implement into their daily lives to actively shape their future.'
+  - ' offers a hands-on guide to living a meaningful life and letting go of negative
+    thoughts by compiling the groundbreaking theories of psychologist Alfred Adler
+    with other valuable research into an all-in-one book for becoming a happy and
+    fulfilled person.'
+- source_sentence: ' is a collection of actionable tips to help you master the art
+    of human communication, leave great first impressions and make people feel comfortable
+    around you in all walks of life.'
   sentences:
-  - ' helps you understand why habits are at the core of everything you do, how you
-    can change them, and what impact that will have on your life, your business and
-    society.'
-  - ' will help you become healthier by teaching you the truth behind the mind-body
-    connection, revealing how your mental state does in fact affect your physical
-    condition and how you can improve both.'
-  - ' shows how people and companies can adapt in the rapidly changing world we live
-    in today, explaining how a growth mindset, colleaboration, and losing your ego
-    will build your confidence that you can stay relevant and competitive as the world
-    around you accelerates.'
+  - ' helps leaders act based on the future, not the past, and allows them to create
+    organizational change at a global level through creative and agile methodologies. '
+  - ' gives you the confidence to make it through life’s inevitable setbacks by sharing
+    ideas and strategies like mindfulness to grow your resilience and come out on
+    top.'
+  - ' is a life-changing guide to growing your self-confidence that shows how posture,
+    mindset, and body language all expand your feeling of empowerment and your communication
+    skills.'
 pipeline_tag: sentence-similarity
 library_name: sentence-transformers
 ---
@@ -130,9 +134,9 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer("sentence_transformers_model_id")
 # Run inference
 sentences = [
-    ' takes a close look at the life of Albert Einstein, beginning in how his childhood shaped him, what his biggest discoveries and personal struggles were and how his focus changed in later years, without his genius\xa0ever fading until his very last moment.',
-    ' shows how people and companies can adapt in the rapidly changing world we live in today, explaining how a growth mindset, colleaboration, and losing your ego will build your confidence that you can stay relevant and competitive as the world around you accelerates.',
-    ' helps you understand why\xa0habits are at the core of everything you\xa0do, how you can change them, and what impact that will have on your life, your business and society.',
+    ' is a collection of actionable tips to help you master the art of human communication, leave great first impressions and make people feel comfortable around you in all walks of life.',
+    ' is a life-changing guide to growing your self-confidence that shows how posture, mindset, and body language all expand your feeling of empowerment and your communication skills.',
+    ' helps leaders act based on the future, not the past, and allows them to create organizational change at a global level through creative and agile methodologies. ',
 ]
 embeddings = model.encode(sentences)
 print(embeddings.shape)
@@ -190,16 +194,16 @@ You can finetune this model on your own dataset.
 * Size: 15,000 training samples
 * Columns: <code>sentence_0</code>, <code>sentence_1</code>, and <code>label</code>
 * Approximate statistics based on the first 1000 samples:
-  |         | sentence_0                                                                         | sentence_1                                                                       | label                                                             |
-  |:--------|:-----------------------------------------------------------------------------------|:---------------------------------------------------------------------------------|:------------------------------------------------------------------|
-  | type    | string                                                                             | string                                                                           | float                                                             |
-  | details | <ul><li>min: 12 tokens</li><li>mean: 41.11 tokens</li><li>max: 67 tokens</li></ul> | <ul><li>min: 2 tokens</li><li>mean: 41.0 tokens</li><li>max: 70 tokens</li></ul> | <ul><li>min: -0.07</li><li>mean: 0.36</li><li>max: 0.79</li></ul> |
+  |         | sentence_0                                                                       | sentence_1                                                                        | label                                                             |
+  |:--------|:---------------------------------------------------------------------------------|:----------------------------------------------------------------------------------|:------------------------------------------------------------------|
+  | type    | string                                                                           | string                                                                            | float                                                             |
+  | details | <ul><li>min: 5 tokens</li><li>mean: 40.8 tokens</li><li>max: 67 tokens</li></ul> | <ul><li>min: 13 tokens</li><li>mean: 41.9 tokens</li><li>max: 81 tokens</li></ul> | <ul><li>min: -0.03</li><li>mean: 0.36</li><li>max: 0.76</li></ul> |
 * Samples:
-  | sentence_0                                                                                                                                                                                                                                                                              | sentence_1                                                                                                                                                                                                                         | label                            |
-  |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
-  | <code> shows you how to stop looking at the clock and start looking at the compass, by figuring out what’s important, prioritizing those things in your life, developing a vision for the future, building the right relationships and becoming a strong leader wherever you go.</code> | <code> teaches us how to persist in creative work when our brain wants to take a million different paths, showing us how to harness our brain power in moments of innovation as well as tediousness.</code>                        | <code>0.41934635043144225</code> |
-  | <code> shares James Comey’s experiences as the director of the FBI and outlines what he learned about leadership, ethics, and politics throughout his life, career, and experiences with President Trump who was the reason he lost his job in May of 2017.</code>                      | <code> will help you become more patient with the speed of your progress by identifying the damaging influences of early achievement culture and societal pressure and how to be proud of reaching your peak later in life.</code> | <code>0.06931390687823295</code> |
-  | <code> gives the relationship advice of hundreds of couples who have stayed together into old age and will teach you how to have happiness and longevity in your love life.</code>                                                                                                      | <code> shows you how to start a successful business based on the principles of the founders of some of the world’s most famous and accomplished startups.</code>                                                                   | <code>0.18417405635118486</code> |
+  | sentence_0                                                                                                                                                                                                                                                                            | sentence_1                                                                                                                                                                                                                                                                  | label                           |
+  |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------|
+  | <code> identifies the stumbling blocks that are in your way of reaching your goals and improving yourself and the research-backed ways to get over them, including how to beat some of the worst productivity and life problems like procrastination, laziness, and much more.</code> | <code> is a classic self-improvement book that will boost your happiness and give you the life of your dreams by identifying what Napoleon Hill learned interviewing hundreds of successful people and sharing how their outlook on life helped them get to the top.</code> | <code>0.3772610414028168</code> |
+  | <code> teaches how you can become more content and happy in your life by applying the principles of meditation and Buddhism. </code>                                                                                                                                                  | <code> will show you how to harness the power of slowing down your body and mind for less distractions, better self-control, and, above all, a happier and more peaceful life.</code>                                                                                       | <code>0.5244289985724858</code> |
+  | <code> is a reminder to slow down and learn to appreciate the little moments in life, like the times when we’re really just waiting for the next big thing, as they shape our lives a lot more than we think.</code>                                                                  | <code> outlines the importance of doing small, little improvements in our everyday life to achieve a successful bigger picture, and how by focusing more on making better day-by-day choices you can shape a remarkable future.</code>                                      | <code>0.5583940505981446</code> |
 * Loss: [<code>CosineSimilarityLoss</code>](https://sbert.net/docs/package_reference/sentence_transformer/losses.html#cosinesimilarityloss) with these parameters:
   ```json
   {

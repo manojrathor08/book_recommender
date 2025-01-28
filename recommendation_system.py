@@ -19,8 +19,10 @@ def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=
             return [f"No close match found for '{book_title}'. Please try another title."], book_title
 
         book_title = closest_match[0]
+        print(f"Giving results for: {book_title}")
 
     # Find the index of the input book
+
     input_idx = data[data['book_name'] == book_title].index[0]
     input_categories = data.loc[input_idx, 'categories_list']
     input_embedding = embeddings[input_idx].reshape(1, -1)  # Reshape for Faiss compatibility
@@ -36,6 +38,8 @@ def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=
     attempt_count = 0
     filtered_books = []
 
+    
+
     # Exclude the input book itself
     indices = indices[1:]
     distances = distances[1:]
@@ -45,13 +49,14 @@ def recommend_books_with_faiss(book_title, data, faiss_index, embeddings, top_n=
 
     # Start filtering by categories
     while len(filtered_books) < top_n and attempt_count < max_attempts:
-        
+
         idx = indices[attempt_count]
         sim = cosine_similarities[attempt_count]
-        
+
         if len(input_categories & data.loc[idx, 'categories_list']) > 0:  # Category overlap
             filtered_books.append((data.loc[idx, 'book_name'], sim))
-        
+
         attempt_count += 1
+
 
     return filtered_books[:top_n], book_title

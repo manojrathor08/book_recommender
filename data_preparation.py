@@ -34,7 +34,7 @@ def preprocess_data(data):
         pd.DataFrame: Preprocessed dataset.
     """
     # Remove duplicates where both 'book_name' and 'categories' are identical
-    data = data.drop_duplicates(subset=['book_name'], keep='first').reset_index(drop=True)
+    data = data.drop_duplicates(subset=['book_name', 'categories'], keep='first').reset_index(drop=True)
     # Drop rows with missing values in 'book_name' and 'summaries'
     missing_or_empty_rows = data[
     (data['book_name'].isna() | (data['book_name'].str.strip() == "") | (data['book_name'].str.strip() == ".")) |
@@ -59,34 +59,47 @@ def preprocess_data(data):
     return data
 
 
+def generate_embeddings(data, model_name='all-MiniLM-L6-v2'):
+    """
+    Generate embeddings for book summaries using a pre-trained SBERT model.
+
+    Args:
+        data (pd.DataFrame): Preprocessed dataset with 'summaries' column.
+        model_name (str): Name of the pre-trained SBERT model.
+
+    Returns:
+        np.ndarray: Array of embeddings.
+    """
+    model = SentenceTransformer(model_name)
+    data['embeddings'] = data['summaries'].apply(lambda x: model.encode(x, convert_to_tensor=True))
+    return model, data
 def generate_pairs(data, num_samples=1000):
-  pairs = []
-  sampled_combinations = combinations(data.iterrows(), 2)
-  for (idx1, row1), (idx2, row2) in sampled_combinations:
-      # Compute Jaccard similarity
-      common_categories = len(set(row1['categories_list']) & set(row2['categories_list']))
-      total_categories = len(set(row1['categories_list']) | set(row2['categories_list']))
-      jaccard_similarity = common_categories / total_categories
+    pairs = []
+    sampled_combinations = combinations(data.iterrows(), 2)
+    for (idx1, row1), (idx2, row2) in sampled_combinations:
+        # Compute Jaccard similarity
+        common_categories = len(set(row1['categories_list']) & set(row2['categories_list']))
+        total_categories = len(set(row1['categories_list']) | set(row2['categories_list']))
+        jaccard_similarity = common_categories / total_categories
 
 
-      # Reuse precomputed embeddings
-      semantic_similarity = util.pytorch_cos_sim(row1['embeddings'], row2['embeddings']).item()
+        # Reuse precomputed embeddings
+        semantic_similarity = util.pytorch_cos_sim(row1['embeddings'], row2['embeddings']).item()
 
-      # Final similarity (weighted average)
-      combined_similarity = 0.9 * semantic_similarity + 0.1 * jaccard_similarity
+        # Final similarity (weighted average)
+        combined_similarity = 0.9 * semantic_similarity + 0.1 * jaccard_similarity
 
-      # Append the pair with book names
-      pairs.append({
-          "book1": row1['book_name'],  # Book name for text1
-          "book2": row2['book_name'],  # Book name for text2
-          "text1": row1['summaries'] ,
-          "text2": row2['summaries'] ,
-          "similarity": combined_similarity
-      })
+        # Append the pair with book names
+        pairs.append({
+            "book1": row1['book_name'],  # Book name for text1
+            "book2": row2['book_name'],  # Book name for text2
+            "text1": row1['summaries'] ,
+            "text2": row2['summaries'] ,
+            "similarity": combined_similarity
+        })
 
-  return pd.DataFrame(pairs)
-
-  # Define bins for similarity scores
+    return pd.DataFrame(pairs)
+# Define bins for similarity scores
 def stratify_data(pairs_df, high_threshold=0.5, low_threshold=0.3, samples_per_bin=5000):
     """
     Stratifies pairs_df into bins based on similarity scores and samples equally from each bin.
