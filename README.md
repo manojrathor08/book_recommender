@@ -1,15 +1,10 @@
----
-title: Book Recommendation System
-emoji: 📚
-colorFrom: indigo
-colorTo: blue
-sdk: gradio
-sdk_version: "3.14.0"
-app_file: app.py
-pinned: false
----
+# Book Recommendation System
+
+This repository contains a Book Recommendation System that uses fine-tuned Sentence-BERT (SBERT) embeddings to recommend books based on the similarity of their summaries and shared categories.
 
 # Book Recommendation System
+
+**Live Demo:** [View the demo here](https://huggingface.co/spaces/rathormanoj08/book_recommender)
 
 This repository contains a Book Recommendation System that uses fine-tuned Sentence-BERT (SBERT) embeddings to recommend books based on the similarity of their summaries and shared categories.
 
